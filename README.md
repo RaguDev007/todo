@@ -6,10 +6,6 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-
-
-
-
 ## deploying the app
 ## step 1 
 install nodejs in to the vps 
@@ -22,7 +18,7 @@ pull the code from the git repository
 
 ## step4
 run cmd npm install || npm install --force
-
+run npm run build 
 ## step 5
 getinto the dist folder where build file exist 
 cd /dist/build
