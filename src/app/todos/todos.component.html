@@ -1,0 +1,88 @@
+<div class="container mt-5">
+    <h3>Todo List</h3>
+  
+    <!-- Form to Add New Todo -->
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5 class="card-title">Add New Task</h5>
+        <form (ngSubmit)="addTodo()" #todoForm="ngForm">
+          <div class="form-group">
+            <label for="taskTitle">Task Title</label>
+            <input type="text" id="taskTitle" class="form-control" [(ngModel)]="newTodo.taskTitle" name="taskTitle" #taskTitle="ngModel" required>
+            <div *ngIf="taskTitle.invalid && (taskTitle.dirty || taskTitle.touched)" class="invalid-feedback">
+              Task Title is required.
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="taskNote">Task Note</label>
+            <input type="text" id="taskNote" class="form-control" [(ngModel)]="newTodo.taskNote" name="taskNote">
+          </div>
+          <div class="form-group">
+            <label for="taskDeadline">Task Deadline</label>
+            <input type="date" id="taskDeadline" class="form-control" [(ngModel)]="newTodo.taskDeadline" name="taskDeadline">
+          </div>
+          <button type="submit" class="btn btn-success btn-block" [disabled]="todoForm.invalid">Add Task</button>
+        </form>
+      </div>
+    </div>
+  
+    <!-- Todo Items in Cards -->
+    <!-- Todo Items in Cards -->
+<div class="row">
+  <div class="col-md-4 mb-4" *ngFor="let todo of todos">
+    <div class="card h-100" (dblclick)="openEditModal(todo)">
+      <div class="card-body">
+        <h5 class="card-title">{{ todo.taskTitle }}</h5>
+        <p class="card-text">{{ todo.taskNote }}</p>
+        <small class="text-muted">Deadline: {{ todo.taskDeadline | date }}</small>
+      </div>
+      <div class="card-footer">
+        <button *ngIf="todo.id" class="btn btn-danger btn-sm float-right" (click)="deleteTodo(todo.id)">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Modal -->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editModalLabel">Edit Task</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #editForm="ngForm">
+          <div class="form-group">
+            <label for="editTaskTitle">Task Title</label>
+            <input type="text" id="editTaskTitle" class="form-control" [(ngModel)]="editTodo.taskTitle" name="taskTitle" required>
+          </div>
+          <div class="form-group">
+            <label for="editTaskNote">Task Note</label>
+            <input type="text" id="editTaskNote" class="form-control" [(ngModel)]="editTodo.taskNote" name="taskNote">
+          </div>
+          <div class="form-group">
+            <label for="editTaskDeadline">Task Deadline</label>
+            <input type="date" id="editTaskDeadline" class="form-control" [(ngModel)]="editTodo.taskDeadline" name="taskDeadline">
+          </div>
+          <div class="form-group">
+            <label for="editTaskStatus">Status</label>
+            <select id="editTaskStatus" class="form-control" [(ngModel)]="editTodo.status" name="status" required>
+              <option value="Pending">Pending</option>
+              <option value="Completed">Completed</option>
+            </select>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="saveEdit()">Update</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </div>
+  

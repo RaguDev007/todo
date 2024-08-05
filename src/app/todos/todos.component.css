@@ -1,0 +1,12 @@
+/* todos.component.css */
+.card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .card-footer {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
